@@ -42,5 +42,29 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Movable Ink is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/movable-ink_stock/
+Movable Ink is a New York-headquartered marketing technology company that turns customer data into
+personalized content across email, mobile and web. Its two products are **Studio** (composite images
+and interactive content generated at open time) and **Da Vinci** (an AI decisioning layer that picks
+what each customer sees).
+
+- Website: https://movableink.com/
+- Mobile SDK docs: https://sdk-mobile.movableink.com/
+- GitHub: https://github.com/movableink
+- Status: https://status.movableink.com/
+- Trust Center: https://trust.movableink.com/
+
+## API surface
+
+| Surface | What it is | Contract |
+|---|---|---|
+| Customer Data API | Write-only behavioral-event collector, `POST https://collector.movableink-dmz.com/behavioral/{endpoint_key}`, HTTP Basic auth with credentials issued by the Movable Ink Solutions team | none published |
+| Platform Identity | Auth0/OIDC tenant at `auth.movableink.com` fronting `app.movableink.com` | OIDC discovery + RFC 8414 metadata + JWKS (all public) |
+| Mobile SDKs | iOS, Android, React Native, Cordova, Flutter, Expo | published to CocoaPods, Maven Central, npm and pub.dev |
+| Studio toolchain | `movable` CLI, `cropduster`, `@movable/studio-utilities` | published to npm |
+
+**No OpenAPI, AsyncAPI, GraphQL SDL, Postman collection, MCP server or A2A agent card was found** on
+any Movable Ink host. Movable Ink's own API reference lives on `support.movableink.com`, which
+requires an active tenant — the Zendesk help-center API returns `401` and anonymous browser requests
+get a Cloudflare interstitial (`403`). What is public is `https://movableink.com/llms.txt`, the OIDC
+discovery documents, the status page, and the Trust Center.
+

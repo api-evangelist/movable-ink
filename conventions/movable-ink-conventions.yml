@@ -1,0 +1,122 @@
+generated: '2026-08-04'
+method: searched
+source: https://www.braze.com/docs/partners/message_personalization/dynamic_content/visual_and_interactive_content/movable_ink/customer_data_api
+name: Movable Ink API Conventions
+description: >-
+  Cross-cutting runtime semantics of the Movable Ink Customer Data API — the one
+  public HTTP surface Movable Ink operates. It is a write-only event collector,
+  not a CRUD API: there are no reads, no collections, and therefore no
+  pagination, filtering, expansion or sparse-fieldset conventions. Everything
+  below was either documented by Movable Ink's own downstream connectors
+  (Braze, Segment, Tealium, MetaRouter, Bloomreach) or observed directly against
+  the live collector.
+surface:
+  name: Customer Data API
+  base_url: https://collector.movableink-dmz.com
+  endpoint: POST /behavioral/{endpoint_key}
+  shape: write-only event ingestion (fire-and-forget collector)
+  content_type: application/json
+authentication:
+  style: HTTP Basic over TLS
+  header: 'Authorization: Basic base64(access_key_id:access_secret)'
+  tenant_binding: >-
+    The tenant is identified by `{endpoint_key}` in the URL path, so the
+    endpoint URL is itself credential material.
+  see: authentication/movable-ink-authentication.yml
+request_envelope:
+  documented_fields:
+    - name: type
+      values: [track, identify]
+      required: true
+      note: Segment-shaped event type.
+    - name: event
+      required: conditional
+      note: The event name (event type / sub-type in the Tealium connector).
+    - name: user_id
+      required: 'one of user_id or anonymous_id'
+      note: Known-user identifier (the Movable Ink `mi_u` id in CDP integrations).
+    - name: anonymous_id
+      required: 'one of user_id or anonymous_id'
+    - name: timestamp
+      required: false
+      format: epoch milliseconds
+      note: Defaults to receipt time when omitted.
+    - name: timezone
+      required: false
+      format: IANA Time Zone Database name
+    - name: properties
+      required: false
+      type: object
+      note: >-
+        Free-form event payload. Movable Ink's Customer Data API is deliberately
+        schema-flexible — it does not require exact parameter names; the mapping
+        from customer field names to Movable Ink concepts is agreed with a
+        Solutions Architect at onboarding rather than enforced by a contract.
+  schema_published: false
+pagination:
+  applicable: false
+  reason: write-only collector; no list or read operations.
+filtering_and_expansion:
+  applicable: false
+idempotency:
+  supported: false
+  documented: false
+  detail: >-
+    No idempotency key header, no request de-duplication semantics, and no
+    at-least-once/exactly-once delivery statement are documented by Movable Ink
+    or by any of its downstream connectors. Retries against the collector are
+    therefore not safe to assume idempotent.
+  gap: >-
+    Movable Ink should document (and, ideally, honour) an idempotency key on the
+    behavioral endpoint — every connector that fans events into it (Segment,
+    Tealium, MetaRouter, Braze) retries on failure.
+request_tracing:
+  response_header: x-request-id
+  body_field: request_id
+  format: UUID v4
+  observed: true
+  detail: >-
+    Every collector response carries an `x-request-id` response header and
+    repeats the same value as `request_id` in the JSON body — a genuinely good
+    default for supportability. Quote it when opening a support case.
+  evidence: 'HTTP/2 404, x-request-id: 42188dfc-f557-4bf5-a904-5cb9ed0d60ef'
+error_envelope:
+  format: bespoke JSON
+  content_type: application/json
+  shape: '{"message": "<human readable>", "request_id": "<uuid>"}'
+  rfc9457: false
+  see: errors/movable-ink-problem-types.yml
+versioning:
+  style: none
+  detail: The endpoint carries no version segment, header, or parameter.
+  see: lifecycle/movable-ink-lifecycle.yml
+rate_limiting:
+  documented: false
+  headers_observed: none
+  detail: >-
+    No published rate limit, quota, or 429 behaviour, and no RateLimit-* or
+    Retry-After headers observed on collector responses. Throughput expectations
+    are set with the Client Experience team per integration.
+metadata:
+  detail: >-
+    Arbitrary customer metadata rides in `properties` (and, in the mobile SDKs
+    from v2.1, in a `meta` field on more event types). There is no dedicated
+    `metadata` namespace with documented key/value limits.
+transport:
+  tls: TLSv1.2 observed on collector.movableink-dmz.com (TLSv1.3 on movableink.com)
+  http_version: HTTP/2
+  hsts: not set on collector.movableink-dmz.com
+cross_links:
+  authentication: authentication/movable-ink-authentication.yml
+  errors: errors/movable-ink-problem-types.yml
+  lifecycle: lifecycle/movable-ink-lifecycle.yml
+  conformance: conformance/movable-ink-conformance.yml
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+    - url: https://collector.movableink-dmz.com/behavioral/testkey
+      status: 404
+    - url: https://docs.tealium.com/server-side-connectors/movable-ink-connector/
+      status: 200
+    - url: https://www.braze.com/docs/partners/message_personalization/dynamic_content/visual_and_interactive_content/movable_ink/customer_data_api
+      status: 200

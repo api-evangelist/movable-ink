@@ -1,0 +1,69 @@
+generated: '2026-08-04'
+method: searched
+source: https://trust.movableink.com/
+url: https://trust.movableink.com/
+name: Movable Ink Trust Center
+description: >-
+  Movable Ink runs a claimed, published Trust Center on Conveyor at
+  trust.movableink.com, plus a first-party Privacy, Security and Compliance page
+  on its own domain. Certifications below are taken from Movable Ink's own
+  entry in the Trust Center payload and corroborated verbatim on
+  movableink.com/privacy-security-and-compliance.
+platform: Conveyor
+tagline: Security & Compliance
+dataroom: https://app.conveyor.com/datarooms/63858759-e7e1-4bf2-ab68-99743118f936
+claimed_by_vendor: true
+certifications:
+- id: iso-27001
+  name: ISO/IEC 27001
+- id: iso-27701
+  name: ISO/IEC 27701
+- id: iso-42001
+  name: ISO/IEC 42001 (AI Management System)
+- id: soc2-type-2
+  name: SOC 2 Type II
+  scope: Movable Ink Studio and Da Vinci
+  cadence: annual, accredited independent auditor
+- id: gdpr
+  name: GDPR
+- id: ccpa
+  name: CCPA
+- id: eu-us-data-privacy
+  name: EU-U.S. Data Privacy Framework (incl. UK Extension and Swiss-U.S. DPF)
+document_access: >-
+  Security review documents are requested through the Conveyor data room rather
+  than downloaded anonymously; the SOC 2 Type II report is not published openly.
+first_party_page:
+  url: https://movableink.com/privacy-security-and-compliance
+  status: 200
+  named_programs:
+  - Independent annual application and network penetration testing
+  - Vulnerability & Patch Management
+  - Intrusion Prevention & Detection
+  - Threat Management
+  - Incident Management
+  - Business Continuity and Disaster Recovery
+  - Secure SDLC & Change Management
+  - Cryptographic Controls
+  - System Monitoring and Logging
+  contacts:
+  - contact_type: Security Inquiries
+    email: infosec@movableink.com
+  - contact_type: Client Trust
+    email: infosec-dd@movableink.com
+  - contact_type: Security Concerns
+    email: security@movableink.com
+corrections:
+  '2026-08-04': >-
+    An automated keyword probe of this page initially recorded HIPAA, FedRAMP,
+    ISO 27017 and ISO 27018 as Movable Ink certifications. Those strings belong
+    to OTHER vendors' cards embedded in the Conveyor page (Confluent, AWS), not
+    to Movable Ink. Corrected against Movable Ink's own certifications array in
+    the page payload and against its first-party compliance page.
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - url: https://trust.movableink.com/
+    status: 200
+  - url: https://movableink.com/privacy-security-and-compliance
+    status: 200

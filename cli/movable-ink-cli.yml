@@ -1,0 +1,53 @@
+generated: '2026-08-04'
+method: searched
+source: https://github.com/movableink/movable-cli
+name: movable — Movable Ink Studio CLI
+description: >-
+  `movable` is Movable Ink's first-party command-line tool for creating,
+  building, serving and deploying Movable Ink Studio applications (the app
+  bundles that render personalised content in email, mobile and web). It is a
+  developer-workflow CLI for Studio app authors, not a management CLI for the
+  Customer Data API — there is no CLI for data ingestion.
+binary: movable
+package: '@movable/cli'
+registry: npm
+package_url: https://www.npmjs.com/package/@movable/cli
+source: https://github.com/movableink/movable-cli
+version: 0.21.0
+released: '2019-03-26'
+install:
+  - method: yarn
+    command: yarn global add @movable/cli
+commands:
+  - name: movable new
+    summary: Create a new Studio app from the default app blueprint.
+  - name: movable init
+    summary: Update an existing app to the latest blueprint.
+  - name: movable build
+    summary: Compile a Studio app for deployment.
+  - name: movable serve
+    summary: Serve the app locally from a development web server.
+  - name: movable login
+    summary: Authenticate with Movable Ink OAuth credentials.
+related:
+  - package: cropduster
+    url: https://github.com/movableink/cropduster
+    role: Browser-side support library for Movable Ink Web Crops, used by Studio apps.
+  - package: '@movable/studio-utilities'
+    url: https://www.npmjs.com/package/@movable/studio-utilities
+    role: Studio framework utility collection.
+  - repo: movableink/studio-app
+    url: https://github.com/movableink/studio-app
+    role: Base application class for building Studio apps.
+notes:
+  - The published npm release is from March 2019; the GitHub repository remains
+    the reference for the command surface.
+  - No Homebrew formula for the CLI itself, though the org publishes
+    movableink/homebrew-formulas.
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+    - url: https://github.com/movableink/movable-cli
+      status: 200
+    - url: https://registry.npmjs.org/@movable/cli
+      status: 200

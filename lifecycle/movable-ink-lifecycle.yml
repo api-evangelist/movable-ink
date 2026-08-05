@@ -1,0 +1,96 @@
+generated: '2026-08-04'
+method: searched
+source: https://status.movableink.com/api/v2/summary.json
+name: Movable Ink API Lifecycle
+description: >-
+  Versioning, status, and change communication for the Movable Ink platform.
+  Movable Ink runs a public Atlassian Statuspage covering Studio, Da Vinci and
+  the Customer Data API, and publishes quarterly product announcements. It does
+  not publish an API versioning policy, a deprecation policy, sunset headers, or
+  an SLA on any public URL.
+status_page:
+  url: https://status.movableink.com
+  provider: Atlassian Statuspage
+  api: https://status.movableink.com/api/v2/summary.json
+  status: 200
+  page_name: Movable Ink
+  components:
+    - group: Studio
+      items: [Web App, Acoustic Campaign, Content Rendering]
+    - group: Studio - Integrations
+      items: [Weather & Location Services, Analytics, Adobe Campaign Classic]
+    - group: Da Vinci
+      items: [Web App, Signal, Dynamic Links, Amazon SES]
+    - group: Da Vinci - ESP Integrations
+      items: [Link Redirect, Active Integrations, Braze, Cheetah Messaging, Data Processing, Analytics, Cordial, Oracle Responsys, SalesForce Marketing Cloud, Zeta]
+    - group: (ungrouped)
+      items: [Customer Data API, Behavior & Conversion Scripts, Exchange Integrations, Webhooks, Mobile SDK]
+  note: >-
+    The Customer Data API, Webhooks and Mobile SDK are named as first-class
+    operational components on the status page — useful corroboration that these
+    are supported surfaces even though their reference documentation is
+    customer-gated.
+versioning:
+  api:
+    scheme: none published
+    detail: >-
+      The Customer Data API endpoint is unversioned:
+      POST https://collector.movableink-dmz.com/behavioral/{endpoint_key}.
+      No version path segment, no version header, no version query parameter is
+      documented by Movable Ink or by any downstream connector.
+  mobile_sdk:
+    scheme: semver
+    current_major: 'v3'
+    detail: >-
+      The mobile SDK family is versioned semantically and released in lockstep
+      across platforms (iOS CocoaPods 3.0.0, Android com.movableink.sdk:inked
+      2.0.0, React Native 3.0.1, Cordova 2.2.0, Flutter 3.1.1). Major versions
+      carry documented behavioral change (v2 added Tactics and Da Vinci events;
+      v3 added Da Vinci push-notification open analytics).
+    source: https://sdk-mobile.movableink.com/changelog
+deprecation:
+  policy_published: false
+  sunset_header: not observed
+  deprecation_header: not observed
+  detail: >-
+    No deprecation or sunset policy is published on any public Movable Ink URL,
+    and no RFC 8594 Sunset/Deprecation headers were observed on the collector
+    responses. Breaking change communication runs through the Client Experience
+    team and the customer-gated support centre.
+sla:
+  published: false
+  detail: >-
+    No public SLA or uptime commitment. Availability is one of the SOC 2 Type II
+    trust service criteria Movable Ink is audited against, but the report is
+    only available via the Trust Center on request.
+change_communication:
+  - name: Product Updates
+    url: https://movableink.com/product-updates
+    cadence: quarterly product announcement
+    status: 200
+  - name: Mobile SDK Changelog
+    url: https://sdk-mobile.movableink.com/changelog
+    status: 200
+  - name: Status Page incident history
+    url: https://status.movableink.com/history
+support:
+  - name: Support Centre (customer-gated)
+    url: https://support.movableink.com/
+    status: 403
+    note: Cloudflare interstitial to anonymous clients; Zendesk help-center API returns 401.
+  - name: Learning Hub
+    url: https://learning.movableink.com/
+    status: 200
+  - name: Contact
+    url: https://movableink.com/contact-us
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+    - url: https://status.movableink.com/api/v2/summary.json
+      status: 200
+    - url: https://sdk-mobile.movableink.com/changelog
+      status: 200
+    - url: https://movableink.com/product-updates
+      status: 200
+    - url: https://support.movableink.com/api/v2/help_center/en-us/categories.json
+      status: 401

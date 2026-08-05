@@ -1,0 +1,106 @@
+generated: '2026-08-04'
+method: searched
+source: https://sdk-mobile.movableink.com/changelog
+name: Movable Ink Change Log
+description: >-
+  Movable Ink publishes change communication in two public places: a per-major
+  release changelog for the mobile SDK family, and a quarterly product
+  announcement page for the platform. Neither is a dated, per-release API
+  changelog — the Customer Data API has no public change log at all.
+channels:
+  - id: mobile-sdk-changelog
+    name: Mobile SDK Changelog
+    url: https://sdk-mobile.movableink.com/changelog
+    status: 200
+    scheme: semver, major-version entries, no release dates published
+    scope: iOS, Android, React Native, Cordova, Flutter, Expo SDKs
+  - id: product-updates
+    name: Product Updates
+    url: https://movableink.com/product-updates
+    status: 200
+    scheme: quarterly product announcement posts
+    scope: Studio, Da Vinci, platform features
+  - id: status-history
+    name: Status page incident history
+    url: https://status.movableink.com/history
+    scope: incidents and maintenance, not feature change
+current_version:
+  mobile_sdk: '3.0'
+  ios_cocoapods: '3.0.0'
+  android_maven: '2.0.0'
+  react_native_npm: '3.0.1'
+  cordova_npm: '2.2.0'
+  flutter_pub: '3.1.1'
+  customer_data_api: unversioned
+entries:
+  - id: mobile-sdk-3.0
+    channel: mobile-sdk-changelog
+    version: '3.0'
+    breaking: unstated
+    highlights:
+      - Support for Da Vinci push notification open analytics, allowing analysis
+        of user interaction with push notifications sent through Da Vinci.
+  - id: mobile-sdk-2.2
+    channel: mobile-sdk-changelog
+    version: '2.2'
+    breaking: false
+    highlights:
+      - Performance Tracking — attribution of analytics such as clicks to
+        specific campaigns in the Movable Ink platform.
+  - id: mobile-sdk-2.1
+    channel: mobile-sdk-changelog
+    version: '2.1'
+    breaking: false
+    highlights:
+      - Added the `meta` field to more events, allowing custom data to be sent
+        alongside the built-in event types.
+  - id: mobile-sdk-2.0
+    channel: mobile-sdk-changelog
+    version: '2.0'
+    breaking: true
+    highlights:
+      - Support for Tactics and Da Vinci Events.
+      - Certain Behavior Events are now automatically forwarded to Da Vinci.
+      - Tactic URLs now use the `/p/tp/` and `/p/tpm/` paths.
+  - id: product-q2-2026
+    channel: product-updates
+    period: Q2 2026
+    title: 'Introducing Programmatic CRM'
+    highlights:
+      - Programmatic CRM — automated decisioning over when and what to show a customer.
+  - id: product-q1-2026
+    channel: product-updates
+    period: Q1 2026
+    title: 'Create at the Speed of Strategy'
+  - id: product-q4-2025
+    channel: product-updates
+    period: Q4 2025
+    title: 'Execute Faster, Prove Impact, and Create with Confidence'
+  - id: product-q3-2025
+    channel: product-updates
+    period: Q3 2025
+    title: 'Q3 2025 Product Announcement'
+  - id: product-q1-2025
+    channel: product-updates
+    period: Q1 2025
+    title: 'Faster and Smarter Execution Across Channels'
+  - id: product-q3-2024
+    channel: product-updates
+    period: Q3 2024
+    title: 'The New Movable Ink Experience'
+  - id: product-q1-2024
+    channel: product-updates
+    period: Q1 2024
+    title: 'Unlock Campaign Potential, Unleash Growth'
+gaps:
+  - Mobile SDK changelog entries carry no release dates.
+  - No change log of any kind for the Customer Data API; the endpoint is
+    unversioned and change is communicated through the Client Experience team.
+  - No RSS/Atom or JSON feed for either channel.
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+    - url: https://sdk-mobile.movableink.com/changelog
+      status: 200
+    - url: https://movableink.com/product-updates
+      status: 200

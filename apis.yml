@@ -1,23 +1,162 @@
 aid: movable-ink
 name: Movable Ink
-description: 'Movable Ink is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Movable Ink is a New York-headquartered marketing technology company that turns
+  customer data into personalized content across email, mobile and web. Its two
+  products are Studio, which generates composite images and interactive content
+  at the moment a message is opened, and Da Vinci, an AI decisioning layer that
+  chooses what content each customer sees. The integration surface is a
+  write-only Customer Data API that streams behavioral events into Studio, a
+  family of native and wrapper mobile SDKs (iOS, Android, React Native, Cordova,
+  Flutter, Expo), a Studio app toolchain built around the `movable` CLI and the
+  cropduster library, and dozens of ESP/CDP connectors. API reference material is
+  customer-gated; no OpenAPI is published.
+image: https://cdn.prod.website-files.com/6601ecc67f6256b863e8143f/6655e1590788a6b11d9441a3_MovableInk-Share.jpeg
 url: https://raw.githubusercontent.com/api-evangelist/movable-ink/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
 - Company
-apis: []
+- Marketing
+- Personalization
+- Email
+- Customer Data
+- Mobile SDK
+- Artificial Intelligence
+- Advertising Technology
+- Content
+- Events
+apis:
+- aid: movable-ink:customer-data-api
+  name: Movable Ink Customer Data API
+  description: >-
+    A write-only HTTP collector that ingests customer behavioral events in real
+    time so Movable Ink Studio can use them for targeting and content generation.
+    Callers POST Segment-shaped JSON events (type, event, user_id or
+    anonymous_id, timestamp, timezone, properties) to a per-tenant endpoint URL
+    with the tenant key in the path, authenticated with HTTP Basic credentials
+    issued by the Movable Ink Solutions team. The API is deliberately
+    schema-flexible: field names are mapped per customer at onboarding rather
+    than fixed by a published contract.
+  humanURL: https://movableink.com/studio
+  baseURL: https://collector.movableink-dmz.com
+  tags:
+  - Customer Data
+  - Events
+  - Personalization
+  - Marketing
+  properties:
+  - type: Authentication
+    url: authentication/movable-ink-authentication.yml
+  - type: Conventions
+    url: conventions/movable-ink-conventions.yml
+  - type: ErrorCatalog
+    url: errors/movable-ink-problem-types.yml
+- aid: movable-ink:identity
+  name: Movable Ink Platform Identity (OpenID Connect)
+  description: >-
+    The OpenID Connect provider that fronts the Movable Ink Studio and Da Vinci
+    web application at app.movableink.com. It publishes a full OIDC discovery
+    document and an RFC 8414 authorization-server metadata document anonymously,
+    advertising authorization, token, userinfo, revocation, device-code, dynamic
+    client registration and MFA challenge endpoints, PKCE (S256), and a JWKS.
+  humanURL: https://app.movableink.com/
+  baseURL: https://auth.movableink.com
+  tags:
+  - Authentication
+  - OpenID Connect
+  - OAuth
+  properties:
+  - type: OpenIDConnect
+    url: well-known/movable-ink-openid-configuration.json
+  - type: OAuthScopes
+    url: scopes/movable-ink-scopes.yml
+  - type: Authentication
+    url: authentication/movable-ink-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/movable-ink-trust-center.yml
+- type: DomainSecurity
+  url: security/movable-ink-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/movable-ink_stock/
+  url: https://movableink.com/
+- type: DeveloperPortal
+  url: https://sdk-mobile.movableink.com/
+- type: Documentation
+  url: https://sdk-mobile.movableink.com/
+- type: GettingStarted
+  url: https://sdk-mobile.movableink.com/
+- type: Support
+  url: https://support.movableink.com/
+- type: HelpCenter
+  url: https://learning.movableink.com/
+- type: Blog
+  url: https://movableink.com/resources/blog
+- type: GitHubOrganization
+  url: https://github.com/movableink
+- type: SignUp
+  url: https://app.movableink.com/
+- type: Login
+  url: https://app.movableink.com/
+- type: TermsOfService
+  url: https://movableink.com/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://movableink.com/privacy-policy
+- type: Compliance
+  url: https://movableink.com/privacy-security-and-compliance
+- type: Security
+  url: security/movable-ink-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/movable-ink-vulnerability-disclosure.yml
+- type: StatusPage
+  url: lifecycle/movable-ink-lifecycle.yml
+- type: ChangeLog
+  url: changelog/movable-ink-changelog.yml
+- type: Lifecycle
+  url: lifecycle/movable-ink-lifecycle.yml
+- type: Packages
+  url: packages/movable-ink-packages.yml
+- type: SDKs
+  url: packages/movable-ink-packages.yml
+- type: CLI
+  url: cli/movable-ink-cli.yml
+- type: WellKnown
+  url: well-known/movable-ink-well-known.yml
+- type: LLMsTxt
+  url: llms/movable-ink-llms.txt
+- type: Conformance
+  url: conformance/movable-ink-conformance.yml
+- type: Conventions
+  url: conventions/movable-ink-conventions.yml
+- type: Authentication
+  url: authentication/movable-ink-authentication.yml
+- type: OAuthScopes
+  url: scopes/movable-ink-scopes.yml
+- type: ErrorCatalog
+  url: errors/movable-ink-problem-types.yml
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+x-coverage:
+  state: covered
+  detail: >-
+    Real public artifacts were harvested (llms.txt, OIDC + OAuth AS metadata, JWKS,
+    Trust Center certifications, status page, package registries), but Movable Ink's
+    own API reference sits on support.movableink.com behind an active-tenant
+    requirement, so no machine-readable contract exists for the Customer Data API.
+  evidence:
+  - url: https://support.movableink.com/api/v2/help_center/en-us/categories.json
+    status: 401
+  - url: https://collector.movableink-dmz.com/openapi.json
+    status: 404
+  checked: '2026-08-04'

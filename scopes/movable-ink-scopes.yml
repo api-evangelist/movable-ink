@@ -1,0 +1,60 @@
+generated: '2026-08-04'
+method: probed
+source: https://auth.movableink.com/.well-known/openid-configuration
+name: Movable Ink OAuth / OpenID Connect Scopes
+description: >-
+  Scopes advertised by the Movable Ink identity tenant (auth.movableink.com, an
+  Auth0 tenant) in its OpenID Connect discovery document. These are the standard
+  OIDC identity scopes that govern login to the Movable Ink Studio application —
+  they are NOT API authorization scopes. The Customer Data API uses HTTP Basic
+  authentication and has no scope model at all; see
+  authentication/movable-ink-authentication.yml.
+issuer: https://auth.movableink.com/
+authorization_endpoint: https://auth.movableink.com/authorize
+token_endpoint: https://auth.movableink.com/oauth/token
+scopes:
+  - name: openid
+    description: Request an ID token — signals an OpenID Connect authentication request.
+  - name: profile
+    description: Basic profile claims (name, given_name, family_name, nickname, picture).
+  - name: offline_access
+    description: Issue a refresh token so the session can be renewed without re-prompting.
+  - name: email
+    description: The user's email address.
+  - name: email_verified
+    description: Whether the user's email address has been verified.
+  - name: name
+    description: The user's full display name.
+  - name: given_name
+    description: The user's given (first) name.
+  - name: family_name
+    description: The user's family (last) name.
+  - name: nickname
+    description: The user's nickname.
+  - name: picture
+    description: URL of the user's profile picture.
+  - name: created_at
+    description: When the user account was created.
+  - name: identities
+    description: Linked identity-provider identities for the user.
+  - name: phone
+    description: The user's phone number.
+  - name: address
+    description: The user's address.
+observed_in_use:
+  scopes: [openid, profile, email, offline_access]
+  where: >-
+    The 302 from https://app.movableink.com/ carries
+    scope=openid+profile+email+offline_access on the authorize request.
+notes:
+  - No resource-server / API scopes (audience-bound permissions) are advertised
+    anonymously. Any per-product authorization inside Studio or Da Vinci is not
+    expressed as a public OAuth scope.
+  - Movable Ink publishes no scopes or permissions reference page on a public URL.
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+    - url: https://auth.movableink.com/.well-known/openid-configuration
+      status: 200
+    - url: https://app.movableink.com/
+      status: 302

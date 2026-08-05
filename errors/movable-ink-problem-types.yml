@@ -1,0 +1,84 @@
+generated: '2026-08-04'
+method: probed
+source: https://collector.movableink-dmz.com/behavioral/{endpoint_key}
+name: Movable Ink Customer Data API Error Catalog
+description: >-
+  Error semantics of the Movable Ink Customer Data API collector, observed
+  directly against the live endpoint. Movable Ink publishes no error reference on
+  a public URL, so this catalog records only responses that were actually
+  elicited. It is deliberately short — recording an error code we did not
+  observe would be fabrication.
+format: bespoke-json
+rfc9457: false
+media_type: application/json
+envelope:
+  fields:
+    - name: message
+      type: string
+      description: Human-readable description of the failure. Not a stable machine code.
+    - name: request_id
+      type: string
+      format: uuid
+      description: >-
+        Correlation id, also returned in the `x-request-id` response header.
+        Quote it to Movable Ink support.
+  example: '{"message": "Behavioral endpoint key not found", "request_id": "<uuid>"}'
+  missing:
+    - No stable error `code` or `type` field — clients must match on HTTP status
+      and, at worst, on English message text.
+    - No `type` URI, `title`, `detail` or `instance` (RFC 9457) members.
+    - No field-level validation errors array.
+problems:
+  - status: 404
+    message: Behavioral endpoint key not found
+    observed: true
+    trigger: >-
+      POST or GET to /behavioral/{endpoint_key} where the key is not a
+      provisioned tenant endpoint key.
+    remediation: >-
+      Use the exact endpoint URL issued by the Movable Ink Solutions / Client
+      Experience team; the key is part of the path, not a query parameter.
+    note: >-
+      Returned for unknown keys regardless of HTTP method, request body validity,
+      or whether an Authorization header is present — the key lookup happens
+      before authentication and before body parsing, so an unauthenticated
+      caller cannot distinguish "bad key" from "bad credential".
+    evidence:
+      - 'GET https://collector.movableink-dmz.com/behavioral/testkey -> 404 application/json'
+      - 'POST (valid JSON) -> 404'
+      - 'POST (malformed body) -> 404'
+  - status: 404
+    message: 404 page not found
+    observed: true
+    media_type: text/plain
+    trigger: Any path outside /behavioral/{key}, including / and /behavioral.
+    note: >-
+      A different, plain-text 404 from the edge router — the collector therefore
+      emits two unrelated 404 shapes depending on how far the request gets.
+not_observed:
+  - status: 401
+    reason: >-
+      Could not be elicited without a provisioned endpoint key; the unknown-key
+      404 short-circuits authentication. Basic-auth failure behaviour is
+      undocumented.
+  - status: 400
+    reason: Body validation errors could not be reached without a valid key.
+  - status: 429
+    reason: No published rate limit; not elicited.
+gaps:
+  - No public error reference. The authoritative guides sit on
+    support.movableink.com, which is customer-gated (401 from the Zendesk help
+    centre API, 403 Cloudflare interstitial in a browser).
+  - No stable machine-readable error codes; clients cannot branch on anything but
+    HTTP status and free text.
+  - Not RFC 9457 — adopting application/problem+json would make this surface
+    legible to agents and generic HTTP clients for free.
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+    - url: https://collector.movableink-dmz.com/behavioral/testkey
+      status: 404
+    - url: https://collector.movableink-dmz.com/behavioral
+      status: 404
+    - url: https://support.movableink.com/api/v2/help_center/en-us/categories.json
+      status: 401

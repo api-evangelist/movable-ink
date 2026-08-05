@@ -1,0 +1,155 @@
+generated: '2026-08-04'
+method: searched
+source: https://registry.npmjs.org/ , https://trunk.cocoapods.org/ , https://search.maven.org/ , https://pub.dev/ , https://rubygems.org/
+name: Movable Ink Packages and SDKs
+description: >-
+  First-party Movable Ink client libraries published to public registries. The
+  mobile SDK family (iOS, Android, React Native, Cordova, Flutter) is the
+  supported integration surface, documented at https://sdk-mobile.movableink.com.
+  The Studio family (movable CLI, cropduster, studio-utilities, fluid) is the
+  toolchain for building Movable Ink Studio apps and Web Crops.
+docs: https://sdk-mobile.movableink.com/
+packages:
+  - name: MovableInk
+    language: swift
+    platform: ios
+    registry: cocoapods
+    url: https://cocoapods.org/pods/MovableInk
+    version: 3.0.0
+    released: '2026-03-30'
+    source: https://github.com/movableink/ios-sdk
+    official: true
+    owner: MovableInk Devs
+    family: mobile-sdk
+    install: "pod 'MovableInk'"
+  - name: com.movableink.sdk:inked
+    language: kotlin
+    platform: android
+    registry: maven-central
+    url: https://central.sonatype.com/artifact/com.movableink.sdk/inked
+    version: 2.0.0
+    official: true
+    family: mobile-sdk
+    install: "implementation 'com.movableink.sdk:inked:2.0.0'"
+  - name: '@movable/react-native-sdk'
+    language: typescript
+    platform: react-native
+    registry: npm
+    url: https://www.npmjs.com/package/@movable/react-native-sdk
+    version: 3.0.1
+    released: '2026-04-21'
+    source: https://github.com/movableink/mobile-sdk-react-native
+    license: MIT
+    official: true
+    family: mobile-sdk
+    install: npm install @movable/react-native-sdk
+  - name: '@movable/cordova-sdk'
+    language: typescript
+    platform: cordova
+    registry: npm
+    url: https://www.npmjs.com/package/@movable/cordova-sdk
+    version: 2.2.0
+    released: '2025-11-10'
+    source: https://github.com/movableink/mobile-sdk-cordova
+    license: MIT
+    official: true
+    family: mobile-sdk
+    install: npm install @movable/cordova-sdk
+  - name: movable_ink_plugin
+    language: dart
+    platform: flutter
+    registry: pub.dev
+    url: https://pub.dev/packages/movable_ink_plugin
+    version: 3.1.1
+    homepage: https://sdk-mobile.movableink.com
+    official: true
+    family: mobile-sdk
+    install: flutter pub add movable_ink_plugin
+  - name: '@movable/cli'
+    language: javascript
+    platform: node
+    registry: npm
+    url: https://www.npmjs.com/package/@movable/cli
+    version: 0.21.0
+    released: '2019-03-26'
+    source: https://github.com/movableink/movable-cli
+    official: true
+    family: studio-tooling
+    kind: cli
+    install: yarn global add @movable/cli
+    note: see cli/movable-ink-cli.yml for the command surface
+  - name: cropduster
+    language: javascript
+    platform: browser
+    registry: npm
+    url: https://www.npmjs.com/package/cropduster
+    version: 8.0.0
+    released: '2023-04-18'
+    source: https://github.com/movableink/cropduster
+    license: MIT
+    official: true
+    family: studio-tooling
+    description: Library for building web pages for use with Movable Ink Web Crops
+  - name: '@movable/studio-utilities'
+    language: javascript
+    platform: browser
+    registry: npm
+    url: https://www.npmjs.com/package/@movable/studio-utilities
+    version: 1.0.1
+    released: '2025-02-28'
+    official: true
+    family: studio-tooling
+    description: Collection of Studio Framework Utilities
+  - name: '@movable/fluid'
+    language: javascript
+    platform: browser
+    registry: npm
+    url: https://www.npmjs.com/package/@movable/fluid
+    version: 2.3.1
+    released: '2025-11-06'
+    source: https://github.com/movableink/fluid
+    homepage: https://movableink.github.io/fluid/docs
+    license: MIT
+    official: true
+    family: design-system
+    description: Movable Ink's design framework for its apps
+  - name: MovableInkAWS
+    language: ruby
+    registry: rubygems
+    url: https://rubygems.org/gems/MovableInkAWS
+    version: 2.11.7
+    source: https://github.com/movableink/awslib
+    official: true
+    family: internal
+    description: AWS utility methods used by Movable Ink infrastructure — not a client SDK
+  - name: mparticle-apple-integration-movableink
+    language: objective-c
+    platform: ios
+    source: https://github.com/movableink/mparticle-apple-integration-movableink
+    official: true
+    family: partner-integration
+    description: mParticle Apple kit for the Movable Ink integration
+  - name: mparticle-android-integration-movableink
+    language: kotlin
+    platform: android
+    source: https://github.com/movableink/mparticle-android-integration-movableink
+    official: true
+    family: partner-integration
+    description: mParticle Android kit for the Movable Ink integration
+gaps:
+  - No first-party server-side SDK (Python, Java, Go, Ruby, .NET, PHP, Node) is
+    published for the Customer Data API — server-to-server integration is raw
+    HTTP with Basic auth, or an iPaaS/CDP connector (Segment, Tealium,
+    MetaRouter, Braze, Bloomreach, Amplitude).
+  - No package is published to PyPI, NuGet, pkg.go.dev, Packagist or crates.io.
+x-evidence:
+  fetched: '2026-08-04'
+  registries_searched:
+    - npm
+    - PyPI
+    - Maven Central
+    - CocoaPods trunk
+    - pub.dev
+    - RubyGems
+    - NuGet
+    - pkg.go.dev

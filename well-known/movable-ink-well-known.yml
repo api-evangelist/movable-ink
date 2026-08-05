@@ -1,0 +1,111 @@
+generated: '2026-08-04'
+method: probed
+source: https://auth.movableink.com/.well-known/openid-configuration
+name: Movable Ink Well-Known Endpoints
+description: >-
+  Every /.well-known/ path probed across the Movable Ink hosts. The identity
+  tenant (auth.movableink.com, an Auth0 tenant that fronts app.movableink.com)
+  serves a full OpenID Connect discovery document, an identical OAuth 2.0
+  authorization-server metadata document, and a JWKS. The marketing site, the
+  Customer Data API collector, and the mobile SDK docs host serve none of the
+  well-known paths.
+hosts:
+  - host: auth.movableink.com
+    role: identity provider (Auth0 tenant behind app.movableink.com)
+  - host: movableink.com
+    role: marketing site (Webflow)
+  - host: collector.movableink-dmz.com
+    role: Customer Data API ingestion collector
+  - host: sdk-mobile.movableink.com
+    role: mobile SDK documentation
+  - host: app.movableink.com
+    role: Movable Ink Studio web application (302 to auth for all paths)
+well_known:
+  - path: /.well-known/openid-configuration
+    host: auth.movableink.com
+    url: https://auth.movableink.com/.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: movable-ink-openid-configuration.json
+    type: OpenIDConnectDiscovery
+  - path: /.well-known/oauth-authorization-server
+    host: auth.movableink.com
+    url: https://auth.movableink.com/.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: movable-ink-oauth-authorization-server.json
+    type: OAuthAuthorizationServerMetadata
+    note: byte-identical to the openid-configuration document
+  - path: /.well-known/jwks.json
+    host: auth.movableink.com
+    url: https://auth.movableink.com/.well-known/jwks.json
+    status: 200
+    content_type: application/json
+    file: movable-ink-jwks.json
+    type: JWKS
+  - path: /.well-known/security.txt
+    host: auth.movableink.com
+    status: 404
+  - path: /.well-known/agent-card.json
+    host: auth.movableink.com
+    status: 404
+  - path: /.well-known/agent.json
+    host: auth.movableink.com
+    status: 404
+  - path: /.well-known/api-catalog
+    host: auth.movableink.com
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    host: auth.movableink.com
+    status: 404
+  - path: /.well-known/security.txt
+    host: movableink.com
+    status: 404
+    note: 'body is an HTML page reading "Invalid .well-known request"'
+  - path: /.well-known/api-catalog
+    host: movableink.com
+    status: 404
+  - path: /.well-known/openid-configuration
+    host: movableink.com
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    host: movableink.com
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    host: movableink.com
+    status: 404
+  - path: /.well-known/agent-card.json
+    host: movableink.com
+    status: 404
+  - path: /.well-known/agent.json
+    host: movableink.com
+    status: 404
+  - path: /.well-known/security.txt
+    host: collector.movableink-dmz.com
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    host: collector.movableink-dmz.com
+    status: 404
+  - path: /.well-known/agent-card.json
+    host: collector.movableink-dmz.com
+    status: 404
+  - path: /.well-known/agent.json
+    host: collector.movableink-dmz.com
+    status: 404
+  - path: /.well-known/agent-card.json
+    host: sdk-mobile.movableink.com
+    status: 404
+misses:
+  security_txt: >-
+    No RFC 9116 security.txt is served on any Movable Ink host. Movable Ink does
+    publish security contacts (security@movableink.com for reports,
+    infosec@movableink.com for security and compliance inquiries) on
+    https://movableink.com/privacy-security-and-compliance — the contacts exist,
+    the machine-readable file does not.
+  api_catalog: No RFC 9727 /.well-known/api-catalog on any host.
+  agent_card: No A2A agent card at either the canonical or the legacy path.
+x-evidence:
+  fetched: '2026-08-04'
+  hosts_probed: 5
+  paths_probed: 24
+  hits: 3
