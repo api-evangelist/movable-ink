@@ -1,0 +1,130 @@
+generated: '2026-08-12'
+method: searched
+source: https://status.movableink.com/api/v2/components.json
+name: Movable Ink Client-Side and Embedded Components
+description: >-
+  Movable Ink's client-side surface is not a component library in the Stripe
+  Elements sense — there is no embeddable widget SDK a developer drops into
+  their own product UI. What it ships instead is a set of tags, scripts and
+  in-app renderers that execute inside the customer's channel: the Studio and
+  Da Vinci Signal client-side tags, the Behavior & Conversion scripts, the Web
+  Crop authoring runtime (cropduster) that renders content into an email or
+  page at open time, and the mobile SDK's HTML-based In-App Messages. Two npm
+  design/tooling packages (@movable/fluid, @movable/studio-utilities) are
+  published publicly but target Movable Ink's own apps and Studio apps rather
+  than arbitrary customer front-ends. Everything below is recorded from the
+  provider's own status page components, its public npm packages, and the
+  partner tag documentation — none of it is a hosted UI component the provider
+  documents as embeddable in a third-party product.
+families:
+  - id: client-side-tags
+    name: Client-side tags
+    kind: script tag
+    embeddable_in: customer website / tag manager
+    components:
+      - name: Movable Ink Studio tag
+        loader: tag-manager deployed script
+        docs: https://docs.tealium.com/client-side-tags/movable-ink-tag/
+        docs_status: 200
+        note: >-
+          Does not support event-specific parameter mapping (per Tealium's
+          comparison with the Da Vinci tag).
+      - name: Movable Ink Da Vinci Signal tag
+        loader: tag-manager deployed script
+        docs: https://docs.tealium.com/client-side-tags/movable-ink-da-vinci-signal-tag/
+        docs_status: 200
+        note: Explicit event model (product viewed, cart, purchase) into Da Vinci.
+      - name: Behavior & Conversion Scripts
+        loader: script tag
+        operator_evidence:
+          component: Behavior & Conversion Scripts
+          state: operational
+        note: >-
+          Named as a first-class operational component on status.movableink.com;
+          no public installation reference is published by Movable Ink.
+    provider_documentation: false
+    documented_by: Tealium (tag vendor), Movable Ink status page
+  - id: web-crops
+    name: Web Crops authoring runtime
+    kind: browser JavaScript library
+    embeddable_in: Movable Ink Studio apps and Web Crops
+    components:
+      - name: cropduster
+        registry: npm
+        package: cropduster
+        version: 8.0.0
+        published: '2023-04-18'
+        source: https://github.com/movableink/cropduster
+        license: MIT
+        description: Support tools for building web pages used with Movable Ink Web Crops.
+      - name: '@movable/studio-utilities'
+        registry: npm
+        package: '@movable/studio-utilities'
+        version: 1.0.1
+        published: '2025-02-28'
+        description: Collection of Studio Framework utilities.
+    examples:
+      repo: https://github.com/movableink/Developer-Docs
+      contents: [examples/api-crop, examples/website-crop]
+      note: >-
+        Movable Ink's public Developer-Docs repo carries two runnable crop
+        examples (HTML + CSS + JS) — the only first-party sample code published
+        outside the customer-gated support centre.
+  - id: in-app-messaging
+    name: In-App Messages
+    kind: native mobile renderer
+    embeddable_in: customer iOS / Android application
+    components:
+      - name: In-App Messages
+        description: Display HTML-based messages within your app.
+        optional: true
+        docs: https://sdk-mobile.movableink.com/
+        platforms: [ios, android, react-native, flutter, expo, cordova]
+    note: >-
+      Documented as an optional mobile SDK feature on the Getting Started page;
+      no per-component styling or theming API is published.
+  - id: design-system
+    name: Fluid design system
+    kind: ember-addon component library
+    embeddable_in: Movable Ink's own applications
+    first_party_only: true
+    components:
+      - name: '@movable/fluid'
+        registry: npm
+        package: '@movable/fluid'
+        version: 2.3.1
+        published: '2025-11-06'
+        source: https://github.com/movableink/fluid
+        install: ember install @movable/fluid
+        docs: https://movableink.github.io/fluid/
+        docs_note: >-
+          The published docs site is a client-rendered Storybook/webpack bundle
+          that serves no readable HTML to a non-JS client, so the component
+          inventory could not be enumerated without executing the page.
+        description: >-
+          Movable Ink's design system (Ember + Tailwind) for its own apps. Public
+          on npm and GitHub but not positioned as a customer integration surface.
+      - name: '@movable/tailwind-config'
+        source: https://github.com/movableink/tailwind-config
+        docs: https://movableink.github.io/tailwind-config
+        description: Tailwind configuration that Fluid builds on.
+absent:
+  - No hosted/prebuilt checkout, portal or dashboard a customer embeds by URL or iframe.
+  - No web-component or custom-element distribution.
+  - No CDN-hosted UI bundle documented with a pinned version.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+    - url: https://status.movableink.com/api/v2/components.json
+      status: 200
+    - url: https://docs.tealium.com/client-side-tags/movable-ink-tag/
+      status: 200
+    - url: https://docs.tealium.com/client-side-tags/movable-ink-da-vinci-signal-tag/
+      status: 200
+    - url: https://movableink.github.io/fluid/
+      status: 200
+      note: renders a bare "Webpack App" shell to a non-JS client
+    - url: https://api.github.com/repos/movableink/Developer-Docs/git/trees/HEAD?recursive=1
+      status: 200
+    - url: https://registry.npmjs.org/@movable/fluid
+      status: 200

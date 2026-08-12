@@ -1,0 +1,71 @@
+generated: '2026-08-12'
+method: probed
+source: https://collector.movableink-dmz.com/behavioral/{endpoint_key}
+name: Movable Ink Rate Limits
+description: >-
+  Movable Ink publishes no rate limit, quota, burst allowance or 429 contract
+  for the Customer Data API, and the live collector returns no rate-limit
+  signalling headers of any kind. Throughput expectations are set per
+  integration with the Movable Ink Client Experience team, which means an agent
+  or an automated pipeline calling this API has no runtime signal to back off
+  against — it can only observe failures. This is the single most consequential
+  documentation gap on the surface, because every CDP/ESP connector that fans
+  events into the collector (Segment, Tealium, MetaRouter, Braze, Bloomreach,
+  Simon Data) retries on failure.
+limit_count: 0
+limits: []
+response_headers:
+  observed: []
+  checked:
+    - RateLimit-Limit
+    - RateLimit-Remaining
+    - RateLimit-Reset
+    - RateLimit-Policy
+    - X-RateLimit-Limit
+    - X-RateLimit-Remaining
+    - X-RateLimit-Reset
+    - Retry-After
+  detail: >-
+    A live POST to the collector returns only date, content-type, content-length
+    and x-request-id. No RateLimit-*, no X-RateLimit-*, no Retry-After, and no
+    RFC 9331 RateLimit-Policy header is emitted on any observed response.
+exhaustion_status: not documented
+retry_guidance:
+  published: false
+  detail: >-
+    No backoff guidance, no retry-after semantics and no idempotency key are
+    documented, so a retry after a timeout may duplicate the event. See
+    conventions/movable-ink-conventions.yml (idempotency.supported = false).
+quotas:
+  published: false
+  detail: >-
+    No event-volume quota, no per-second cap and no monthly allowance is
+    published. Volume is a commercial term negotiated in the contract, not a
+    documented technical limit — see plans/movable-ink-plans-pricing.yml.
+other_surfaces:
+  - surface: auth.movableink.com (Auth0 OIDC tenant)
+    published_limits: false
+    note: >-
+      Auth0 applies its own tenant rate limits to /oauth/token and the other
+      OIDC endpoints, but Movable Ink publishes no tenant-specific numbers and
+      the discovery document carries none.
+  - surface: Mobile SDKs
+    published_limits: false
+    note: >-
+      sdk-mobile.movableink.com documents no client-side event batching size,
+      flush interval cap or throttling behaviour.
+gap: >-
+  Movable Ink should publish a rate limit for the behavioral endpoint and emit
+  RateLimit-* (RFC 9331) plus Retry-After on 429. Naming the limit costs nothing
+  and the connectors calling it are all built to honour those headers.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+    - url: https://collector.movableink-dmz.com/behavioral/aeprobe
+      method: POST
+      status: 404
+      response_headers: [date, content-type, content-length, x-request-id]
+      body: '{"message":"Behavioral endpoint key not found","request_id":"<uuid>"}'
+    - url: https://support.movableink.com/hc/en-us
+      status: 403
+      note: Cloudflare bot interstitial — the customer-gated support centre is where any documented limit would live.

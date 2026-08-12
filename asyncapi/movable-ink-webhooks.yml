@@ -1,0 +1,92 @@
+generated: '2026-08-12'
+method: searched
+source: https://status.movableink.com/api/v2/components.json
+name: Movable Ink Event and Webhook Surface
+description: >-
+  Movable Ink operates a webhook surface and says so on its own status page —
+  "Webhooks" is a first-class operational component alongside "Customer Data
+  API", "Behavior & Conversion Scripts" and "Mobile SDK". Downstream partners
+  independently document receiving webhook deliveries from Movable Ink (Simon
+  Data receives events and profile traits back; Oracle Infinity configures a
+  webhook connection type for the destination). What Movable Ink does NOT
+  publish anywhere public is the catalog: no event-type list, no payload
+  schema, no signing/verification scheme, no retry or delivery-guarantee
+  statement, and no AsyncAPI document. The surface is advertised; its contract
+  is customer-gated.
+spec_type: none
+asyncapi_published: false
+catalog_published: false
+surfaces:
+  - id: outbound-webhooks
+    name: Webhooks
+    direction: outbound (Movable Ink -> customer or partner endpoint)
+    operator_evidence:
+      url: https://status.movableink.com/api/v2/components.json
+      status: 200
+      component: Webhooks
+      state: operational
+    documented_by_provider: false
+    partner_documentation:
+      - partner: Simon Data
+        url: https://docs.simondata.com/docs/movable-ink
+        detail: >-
+          "Movable Ink sends Events or Profile Traits back to Simon Data. Data
+          can be stored as events or on user profiles for customers with
+          Audiences API enabled." Simon's own doc marks the method as still
+          being written up.
+      - partner: Oracle Infinity
+        url: https://docs.oracle.com/en/cloud/saas/marketing/infinity-user/Help/integrate/movableink/tasks/configuringconnection_movableink.htm
+        detail: >-
+          Documents selecting a Webhook connection type, destination type and
+          destination when wiring Infinity events to Movable Ink.
+    gaps:
+      - No published event-type catalog.
+      - No payload schema or example delivery.
+      - No signature header / verification procedure documented.
+      - No retry, ordering or at-least-once delivery statement.
+  - id: customer-data-api
+    name: Customer Data API (inbound event ingestion)
+    direction: inbound (customer/CDP -> Movable Ink)
+    detail: >-
+      The write-only behavioral collector is the inbound half of the event
+      surface. It is HTTP request/response, not a broker or stream, so it is
+      not modelled as an AsyncAPI channel. See
+      conventions/movable-ink-conventions.yml and
+      errors/movable-ink-problem-types.yml.
+    endpoint: POST https://collector.movableink-dmz.com/behavioral/{endpoint_key}
+  - id: da-vinci-signal
+    name: Da Vinci Signal
+    direction: inbound (browser -> Movable Ink)
+    detail: >-
+      A client-side tag that emits an explicit event model (product viewed,
+      cart, purchase) into Da Vinci. Documented publicly only by Tealium, as a
+      tag configuration; Movable Ink publishes no event schema for it.
+    partner_documentation:
+      - url: https://docs.tealium.com/client-side-tags/movable-ink-da-vinci-signal-tag/
+        status: 200
+    operator_evidence:
+      component: Signal
+      state: operational
+streaming:
+  websocket: false
+  sse: false
+  kafka: false
+  detail: No public streaming or message-broker surface is documented.
+gap: >-
+  Movable Ink already runs the surface and monitors it publicly. Publishing an
+  event-type list with payload examples and a signature scheme — or an AsyncAPI
+  3.0 document — would turn an operational component name into something an
+  integrator or an agent can actually build against.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+    - url: https://status.movableink.com/api/v2/components.json
+      status: 200
+      note: components include "Webhooks", "Customer Data API", "Behavior & Conversion Scripts", "Mobile SDK", "Signal"
+    - url: https://collector.movableink-dmz.com/asyncapi.yaml
+      status: 404
+    - url: https://sdk-mobile.movableink.com/asyncapi.yaml
+      status: 404
+    - url: https://support.movableink.com/hc/en-us
+      status: 403
+      note: Cloudflare bot interstitial over the customer-gated support centre

@@ -1,6 +1,6 @@
-generated: '2026-08-04'
+generated: '2026-08-12'
 method: searched
-source: https://registry.npmjs.org/ , https://trunk.cocoapods.org/ , https://search.maven.org/ , https://pub.dev/ , https://rubygems.org/
+source: https://registry.npmjs.org/ , https://trunk.cocoapods.org/ , https://repo1.maven.org/maven2/ , https://pub.dev/ , https://rubygems.org/
 name: Movable Ink Packages and SDKs
 description: >-
   First-party Movable Ink client libraries published to public registries. The
@@ -16,7 +16,7 @@ packages:
     registry: cocoapods
     url: https://cocoapods.org/pods/MovableInk
     version: 3.0.0
-    released: '2026-03-30'
+    published: '2026-03-30'
     source: https://github.com/movableink/ios-sdk
     official: true
     owner: MovableInk Devs
@@ -27,17 +27,22 @@ packages:
     platform: android
     registry: maven-central
     url: https://central.sonatype.com/artifact/com.movableink.sdk/inked
-    version: 2.0.0
+    version: 3.0.1
+    published: '2026-04-21'
     official: true
     family: mobile-sdk
-    install: "implementation 'com.movableink.sdk:inked:2.0.0'"
+    install: "implementation 'com.movableink.sdk:inked:3.0.1'"
+    note: >-
+      Corrected 2026-08-12 from repo1.maven.org/maven2/com/movableink/sdk/inked/maven-metadata.xml
+      (<latest>3.0.1</latest>, lastUpdated 20260421); the 2026-08-04 pass recorded 2.0.0.
+      Publish date read from the Last-Modified on inked-3.0.1.pom.
   - name: '@movable/react-native-sdk'
     language: typescript
     platform: react-native
     registry: npm
     url: https://www.npmjs.com/package/@movable/react-native-sdk
     version: 3.0.1
-    released: '2026-04-21'
+    published: '2026-04-21'
     source: https://github.com/movableink/mobile-sdk-react-native
     license: MIT
     official: true
@@ -49,7 +54,7 @@ packages:
     registry: npm
     url: https://www.npmjs.com/package/@movable/cordova-sdk
     version: 2.2.0
-    released: '2025-11-10'
+    published: '2025-11-10'
     source: https://github.com/movableink/mobile-sdk-cordova
     license: MIT
     official: true
@@ -61,6 +66,7 @@ packages:
     registry: pub.dev
     url: https://pub.dev/packages/movable_ink_plugin
     version: 3.1.1
+    published: '2026-07-27'
     homepage: https://sdk-mobile.movableink.com
     official: true
     family: mobile-sdk
@@ -71,7 +77,7 @@ packages:
     registry: npm
     url: https://www.npmjs.com/package/@movable/cli
     version: 0.21.0
-    released: '2019-03-26'
+    published: '2019-03-26'
     source: https://github.com/movableink/movable-cli
     official: true
     family: studio-tooling
@@ -84,7 +90,7 @@ packages:
     registry: npm
     url: https://www.npmjs.com/package/cropduster
     version: 8.0.0
-    released: '2023-04-18'
+    published: '2023-04-18'
     source: https://github.com/movableink/cropduster
     license: MIT
     official: true
@@ -96,7 +102,7 @@ packages:
     registry: npm
     url: https://www.npmjs.com/package/@movable/studio-utilities
     version: 1.0.1
-    released: '2025-02-28'
+    published: '2025-02-28'
     official: true
     family: studio-tooling
     description: Collection of Studio Framework Utilities
@@ -106,7 +112,7 @@ packages:
     registry: npm
     url: https://www.npmjs.com/package/@movable/fluid
     version: 2.3.1
-    released: '2025-11-06'
+    published: '2025-11-06'
     source: https://github.com/movableink/fluid
     homepage: https://movableink.github.io/fluid/docs
     license: MIT
@@ -118,6 +124,7 @@ packages:
     registry: rubygems
     url: https://rubygems.org/gems/MovableInkAWS
     version: 2.11.7
+    published: '2026-05-26'
     source: https://github.com/movableink/awslib
     official: true
     family: internal
@@ -125,6 +132,13 @@ packages:
   - name: mparticle-apple-integration-movableink
     language: objective-c
     platform: ios
+    registry: none
+    version: null
+    published: null
+    version_note: >-
+      Checked 2026-08-12 — no CocoaPods trunk entry (trunk.cocoapods.org/api/v1/pods/mParticle-MovableInk
+      returns 404). Distributed as source only via GitHub; consumers pull a git ref, so there is
+      no published version or release date to record.
     source: https://github.com/movableink/mparticle-apple-integration-movableink
     official: true
     family: partner-integration
@@ -132,6 +146,12 @@ packages:
   - name: mparticle-android-integration-movableink
     language: kotlin
     platform: android
+    registry: none
+    version: null
+    published: null
+    version_note: >-
+      Checked 2026-08-12 — no Maven Central artifact at com.mparticle:android-movableink-kit
+      (maven-metadata.xml 404). Distributed as source only via GitHub.
     source: https://github.com/movableink/mparticle-android-integration-movableink
     official: true
     family: partner-integration
@@ -142,8 +162,18 @@ gaps:
     HTTP with Basic auth, or an iPaaS/CDP connector (Segment, Tealium,
     MetaRouter, Braze, Bloomreach, Amplitude).
   - No package is published to PyPI, NuGet, pkg.go.dev, Packagist or crates.io.
+currency:
+  checked: '2026-08-12'
+  method: registry metadata endpoints (registry.npmjs.org, trunk.cocoapods.org, repo1.maven.org, pub.dev, rubygems.org)
+  findings:
+    - The mobile SDK family is actively maintained — iOS 3.0.0 (2026-03-30), Android 3.0.1
+      (2026-04-21), React Native 3.0.1 (2026-04-21), Flutter 3.1.1 (2026-07-27) all shipped in 2026.
+    - Cordova 2.2.0 (2025-11-10) trails the rest of the family by a major version.
+    - '@movable/cli 0.21.0 has not been republished since 2019-03-26 and its GitHub repo
+      (movableink/movable-cli) is archived — the Studio app toolchain is effectively frozen,
+      while cropduster (8.0.0, 2023-04-18) is also long-idle. See cli/movable-ink-cli.yml.'
 x-evidence:
-  fetched: '2026-08-04'
+  fetched: '2026-08-12'
   registries_searched:
     - npm
     - PyPI

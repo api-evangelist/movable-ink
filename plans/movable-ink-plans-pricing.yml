@@ -1,0 +1,52 @@
+generated: '2026-08-12'
+method: searched
+source: https://movableink.com/
+name: Movable Ink Plans and Pricing
+description: >-
+  Movable Ink publishes no pricing page, no plan tiers, no quotas and no
+  published overage rates on any of its own public hosts. Every commercial
+  motion runs through a sales conversation — the site's calls to action are
+  "Get a demo" and "Contact us", and the Customer Data API endpoint key plus
+  its Basic-auth credentials are issued by a Movable Ink Solutions Architect
+  during onboarding rather than self-served from an account. There is no
+  self-serve signup, no free tier, and no trial that a developer can start
+  without talking to sales.
+plan_count: 0
+pricing_model: enterprise sales-negotiated annual contract (not published)
+self_serve: false
+free_tier: false
+trial: false
+published_pricing_page: false
+notes:
+  - >-
+    https://movableink.com/pricing returns HTTP 404 — the marketing site
+    (Webflow) has no pricing route at all. Neither do /contact, /demo or
+    /request-a-demo; the demo request is a form embedded in page templates.
+  - >-
+    app.movableink.com is a login, not a signup: it 302s anonymous requests to
+    the auth.movableink.com Auth0 tenant. There is no public tenant creation
+    flow, so a developer cannot obtain a Customer Data API endpoint key or the
+    Studio/Da Vinci app without an executed contract.
+  - >-
+    Third-party procurement marketplaces (Vendr, Capchase, GetApp, OMR) list
+    negotiated ranges for Movable Ink contracts. Those are buyer-reported
+    figures, not provider-published prices, so none of them are recorded here
+    as plan data.
+  - >-
+    Because nothing is published, no rate card, quota, entitlement or overage
+    can be attached to a tier. This is a plan_count of zero by the provider's
+    own choice, not a gap in the harvest.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+    - url: https://movableink.com/pricing
+      status: 404
+    - url: https://movableink.com/contact
+      status: 404
+    - url: https://movableink.com/demo
+      status: 404
+    - url: https://movableink.com/request-a-demo
+      status: 404
+    - url: https://app.movableink.com/
+      status: 302
+      note: redirects to auth.movableink.com — login only, no self-serve signup

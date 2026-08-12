@@ -17,7 +17,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.20'
 created: '2026-08-04'
-modified: '2026-08-04'
+modified: '2026-08-12'
 tags:
 - Company
 - Marketing
@@ -117,7 +117,7 @@ common:
 - type: VulnerabilityDisclosure
   url: security/movable-ink-vulnerability-disclosure.yml
 - type: StatusPage
-  url: lifecycle/movable-ink-lifecycle.yml
+  url: https://status.movableink.com
 - type: ChangeLog
   url: changelog/movable-ink-changelog.yml
 - type: Lifecycle
@@ -142,21 +142,38 @@ common:
   url: scopes/movable-ink-scopes.yml
 - type: ErrorCatalog
   url: errors/movable-ink-problem-types.yml
+- type: Plans
+  url: plans/movable-ink-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/movable-ink-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/movable-ink-webhooks.yml
+- type: Components
+  url: components/movable-ink-components.yml
 x-enrichment:
-  date: '2026-08-04'
+  date: '2026-08-12'
   status: enriched
-  artifacts_added: 17
+  artifacts_added: 4
   pass: local-v1
 x-coverage:
   state: covered
   detail: >-
     Real public artifacts were harvested (llms.txt, OIDC + OAuth AS metadata, JWKS,
-    Trust Center certifications, status page, package registries), but Movable Ink's
-    own API reference sits on support.movableink.com behind an active-tenant
+    Trust Center certifications, status page, package registries, plans, rate limits,
+    webhook surface, client-side components), but Movable Ink's own API reference sits
+    on support.movableink.com behind a Cloudflare interstitial and an active-tenant
     requirement, so no machine-readable contract exists for the Customer Data API.
+    Contract re-discovery on 2026-08-12 re-ran the full hunt — OpenAPI/Swagger paths on
+    the collector and docs hosts, agent cards at both well-known paths on six hosts,
+    DNS for mcp./api./docs./developer. subdomains, and the movableink GitHub org —
+    and every probe missed.
   evidence:
   - url: https://support.movableink.com/api/v2/help_center/en-us/categories.json
     status: 401
   - url: https://collector.movableink-dmz.com/openapi.json
     status: 404
-  checked: '2026-08-04'
+  - url: https://support.movableink.com/hc/en-us
+    status: 403
+  - url: https://collector.movableink-dmz.com/.well-known/agent-card.json
+    status: 404
+  checked: '2026-08-12'

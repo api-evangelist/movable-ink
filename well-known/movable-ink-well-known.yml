@@ -95,6 +95,37 @@ well_known:
   - path: /.well-known/agent-card.json
     host: sdk-mobile.movableink.com
     status: 404
+  - path: /.well-known/agent.json
+    host: sdk-mobile.movableink.com
+    status: 404
+    checked: '2026-08-12'
+  - path: /.well-known/agent-card.json
+    host: app.movableink.com
+    status: 302
+    checked: '2026-08-12'
+    note: 302 to auth.movableink.com — the Studio app redirects every anonymous path
+  - path: /.well-known/agent.json
+    host: app.movableink.com
+    status: 302
+    checked: '2026-08-12'
+  - path: /.well-known/agent-card.json
+    host: exchange.movableink.com
+    status: 200
+    content_type: text/html
+    checked: '2026-08-12'
+    verdict: miss
+    note: >-
+      FALSE POSITIVE — exchange.movableink.com is a Webflow single-page site whose
+      catch-all answers HTTP 200 with the same HTML shell for EVERY path, including
+      /.well-known/agent.json, /openapi.json and /llms.txt. A 200 here is not a
+      document; it is the site template. Rejected per the HTML-body rule.
+  - path: /.well-known/agent.json
+    host: exchange.movableink.com
+    status: 200
+    content_type: text/html
+    checked: '2026-08-12'
+    verdict: miss
+    note: same Webflow catch-all shell
 misses:
   security_txt: >-
     No RFC 9116 security.txt is served on any Movable Ink host. Movable Ink does
@@ -103,9 +134,31 @@ misses:
     https://movableink.com/privacy-security-and-compliance — the contacts exist,
     the machine-readable file does not.
   api_catalog: No RFC 9727 /.well-known/api-catalog on any host.
-  agent_card: No A2A agent card at either the canonical or the legacy path.
+  agent_card: >-
+    No A2A agent card at either the canonical (/.well-known/agent-card.json) or
+    the legacy (/.well-known/agent.json) path, on any of the six hosts, re-probed
+    2026-08-12. The only 200s came from the exchange.movableink.com Webflow
+    catch-all serving HTML, which is not a card. No a2a/ artifact is written —
+    an agent card is search-only and must never be authored on a provider's behalf.
+  mcp: >-
+    No hosted MCP server. mcp.movableink.com and api.movableink.com do not resolve
+    in DNS, no MCP endpoint is documented, and no /.well-known/oauth-protected-resource
+    is served. With no OpenAPI to derive candidate tools from, no mcp/ artifact
+    is written.
 x-evidence:
-  fetched: '2026-08-04'
-  hosts_probed: 5
-  paths_probed: 24
+  fetched: '2026-08-12'
+  hosts_probed: 6
+  paths_probed: 31
   hits: 3
+  reprobe_2026_08_12:
+    - url: https://collector.movableink-dmz.com/.well-known/agent-card.json
+      status: 404
+    - url: https://movableink.com/.well-known/agent.json
+      status: 404
+    - url: https://auth.movableink.com/.well-known/agent-card.json
+      status: 404
+    - url: https://exchange.movableink.com/.well-known/agent-card.json
+      status: 200
+      note: HTML shell, rejected
+    - url: https://collector.movableink-dmz.com/.well-known/security.txt
+      status: 404
