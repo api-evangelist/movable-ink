@@ -15,7 +15,7 @@ image: https://cdn.prod.website-files.com/6601ecc67f6256b863e8143f/6655e1590788a
 url: https://raw.githubusercontent.com/api-evangelist/movable-ink/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-12'
 tags:
