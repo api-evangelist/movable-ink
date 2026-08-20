@@ -28,6 +28,17 @@ tags:
 - Artificial Intelligence
 - Advertising Technology
 - Content
+- Event
+tags_raw:
+- Company
+- Marketing
+- Personalization
+- Email
+- Customer Data
+- Mobile SDK
+- Artificial Intelligence
+- Advertising Technology
+- Content
 - Events
 apis:
 - aid: movable-ink:customer-data-api
@@ -44,6 +55,11 @@ apis:
   humanURL: https://movableink.com/studio
   baseURL: https://collector.movableink-dmz.com
   tags:
+  - Customer Data
+  - Event
+  - Personalization
+  - Marketing
+  tags_raw:
   - Customer Data
   - Events
   - Personalization
@@ -66,6 +82,9 @@ apis:
   humanURL: https://app.movableink.com/
   baseURL: https://auth.movableink.com
   tags:
+  - Authentication
+  - OpenID Connect
+  tags_raw:
   - Authentication
   - OpenID Connect
   - OAuth
