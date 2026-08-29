@@ -11,6 +11,17 @@ description: >-
   Flutter, Expo), a Studio app toolchain built around the `movable` CLI and the
   cropduster library, and dozens of ESP/CDP connectors. API reference material is
   customer-gated; no OpenAPI is published.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/6601ecc67f6256b863e8143f/6655e1590788a6b11d9441a3_MovableInk-Share.jpeg
 url: https://raw.githubusercontent.com/api-evangelist/movable-ink/refs/heads/main/apis.yml
 x-type: company
