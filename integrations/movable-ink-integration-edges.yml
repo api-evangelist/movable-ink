@@ -7,37 +7,14 @@ checked:
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
 marketplace_apps: []
 edges:
-- partner_name: Google Ad Tech Providers
-  partner: null
-  partner_match: domain
-  type: contract
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://storage.googleapis.com/tcfac/additional-consent-providers.csv
-  contract_reference:
-    register: Google Ad Tech Providers (Additional Consent)
-    spec_file: null
-    role: google-atp
-    registered_name: Movable Ink
-    register_id: '2917'
-    products:
-    - Movable Ink
-    matched_domain: movableink.com
-    api_families: null
-    api_families_basis: null
-    detected_by: sweep-adtech.py
-    detected: '2026-10-14'
-  detected_by: sweep-adtech.py
-  detected: '2026-10-14'
 - partner_name: Twilio Segment
   partner: segment
   partner_match: aggregator
-  marketplace: coverage
+  marketplace: segment-partner-destinations
   channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: connector-coverage
+  direction: third-party
+  type: marketplace
+  relationship: platform-app
   evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
   coverage_role:
   - destination
@@ -100,6 +77,29 @@ edges:
       - insert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Google Ad Tech Providers
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+  contract_reference:
+    register: Google Ad Tech Providers (Additional Consent)
+    spec_file: null
+    role: google-atp
+    registered_name: Movable Ink
+    register_id: '2917'
+    products:
+    - Movable Ink
+    matched_domain: movableink.com
+    api_families: null
+    api_families_basis: null
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
 source:
 - https://docs.mparticle.com/integrations/movableink-v2/event/
 - https://hightouch.com/docs/destinations/movable-ink
