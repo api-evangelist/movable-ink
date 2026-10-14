@@ -1,0 +1,106 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://docs.mparticle.com/integrations/movableink-v2/event/
+- https://hightouch.com/docs/destinations/movable-ink
+- https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
+marketplace_apps: []
+edges:
+- partner_name: Google Ad Tech Providers
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+  contract_reference:
+    register: Google Ad Tech Providers (Additional Consent)
+    spec_file: null
+    role: google-atp
+    registered_name: Movable Ink
+    register_id: '2917'
+    products:
+    - Movable Ink
+    matched_domain: movableink.com
+    api_families: null
+    api_families_basis: null
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - actions-movable-ink
+      status: PUBLIC
+      partner_owned: true
+      connection_modes:
+      - cloud:server
+      - cloud:web
+      accepted_methods:
+      - Alias
+      - Group
+      - Identify
+      - Page
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/movableink-v2/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - movableink-v2
+      - movableink
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/movable-ink
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - movable-ink
+      status: released
+      sync_types:
+      - Event
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+source:
+- https://docs.mparticle.com/integrations/movableink-v2/event/
+- https://hightouch.com/docs/destinations/movable-ink
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
