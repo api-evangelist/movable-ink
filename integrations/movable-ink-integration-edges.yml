@@ -1,8 +1,15 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
 - https://docs.mparticle.com/integrations/movableink-v2/event/
 - https://hightouch.com/docs/destinations/movable-ink
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
 marketplace_apps: []
@@ -100,6 +107,93 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
+- partner_name: Maven Central
+  partner: maven-central
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Java/JVM)
+  evidence: https://central.sonatype.com/artifact/com.movableink.sdk/inked
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.movableink.sdk:inked
+      version: 3.0.1
+      released: '2026-04-21'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.movableink.sdk/inked
+      repo_leg: github-org:movableink
+      publisher_leg: groupId:movableink.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@movable/cli
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@movable/cli'
+      version: 0.21.0
+      released: '2026-07-27'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@movable/cli
+      repo_leg: github-org:movableink
+      publisher_leg: email:movableink.com
+      matched_by: domain
+    - name: '@movable/cordova-sdk'
+      version: 2.2.0
+      released: '2026-07-27'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@movable/cordova-sdk
+      repo_leg: github-org:movableink
+      publisher_leg: email:movableink.com
+      matched_by: domain
+    - name: '@movable/fluid'
+      version: 3.0.1
+      released: '2026-09-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@movable/fluid
+      repo_leg: github-org:movableink
+      publisher_leg: email:movableink.com
+      matched_by: domain
+    - name: '@movable/react-native-sdk'
+      version: 3.0.1
+      released: '2026-07-27'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@movable/react-native-sdk
+      repo_leg: github-org:movableink
+      publisher_leg: email:movableink.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 source:
 - https://docs.mparticle.com/integrations/movableink-v2/event/
 - https://hightouch.com/docs/destinations/movable-ink
