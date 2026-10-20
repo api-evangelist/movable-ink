@@ -2,13 +2,9 @@ generated: '2026-10-14'
 method: searched
 checked:
 - https://api.nuget.org/v3
-- https://cdn.winget.microsoft.com/cache
 - https://crates.io/api/v1
 - https://docs.mparticle.com/integrations/movableink-v2/event/
-- https://formulae.brew.sh/api/cask.json
-- https://formulae.brew.sh/api/formula.json
-- https://github.com/ScoopInstaller/Extras
-- https://github.com/ScoopInstaller/Main
+- https://docs.mparticle.com/integrations/movableink/event/
 - https://hightouch.com/docs/destinations/movable-ink
 - https://proxy.golang.org
 - https://pypi.org/pypi
@@ -17,6 +13,12 @@ checked:
 - https://rubygems.org/api/v1
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-movable-ink
+- https://cdn.winget.microsoft.com/cache
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
+- https://marketplace.databricks.com/
 marketplace_apps: []
 edges:
 - partner_name: Google Ad Tech Providers
@@ -157,6 +159,26 @@ edges:
       - Track
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/movableink/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - movableink
+      - movableink-v2
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 - partner_name: Hightouch
   partner: hightouch
   partner_match: aggregator
@@ -209,26 +231,31 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-official-clis.py
   first_seen: '2026-10-20'
-- partner_name: mParticle
-  partner: mparticle
+- partner_name: Databricks Marketplace
+  partner: databricks
   partner_match: aggregator
-  marketplace: coverage
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://docs.mparticle.com/integrations/movableink-v2/event/
-  coverage_role:
-  - destination
-  cdp_signals:
-    destination:
-      catalog_entries:
-      - movableink-v2
-      - movableink
-      integration_types:
-      - event
-  detected_by: sweep-cdp.py
-  first_seen: '2026-10-14'
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://marketplace.databricks.com/provider/c0156b90-0da7-4955-b007-c8b14e8a4c68
+  category: data product listing
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Movable Ink
+    matched_domain: movableink.com
+    matched_by: domain
+    listings: 1
+    sample_listings:
+    - Movable Ink Studio Campaign and User Level Data
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
 source:
 - https://docs.mparticle.com/integrations/movableink-v2/event/
 - https://hightouch.com/docs/destinations/movable-ink
