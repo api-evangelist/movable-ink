@@ -22,6 +22,7 @@ checked:
 - https://hex.pm/api
 - https://packagist.org/packages
 - https://pub.dev/api
+- adobe-campaign/integrations/adobe-campaign-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Google Ad Tech Providers
@@ -289,6 +290,24 @@ edges:
     detected: '2026-10-22'
   detected_by: sweep-php-dart-elixir-package-registries.py
   first_seen: '2026-10-22'
+- partner_name: Adobe Campaign (own)
+  partner: adobe-campaign
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://exchange.adobe.com/apps/ec/90056
+  mirror_of: adobe-campaign/integrations/adobe-campaign-integration-edges.yml
+  apps:
+  - Movable Ink Studio
+  - Movable Ink Da Vinci
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Exchange Experience Cloud listing (Campaign)
 source:
 - https://docs.mparticle.com/integrations/movableink-v2/event/
 - https://hightouch.com/docs/destinations/movable-ink

@@ -208,3 +208,16 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: movable-ink-adobe-campaign-own
+  label: Adobe Campaign (own)
+  partner: adobe-campaign
+  partner_name: Adobe Campaign (own)
+  category: Adobe Exchange Experience Cloud listing (Campaign)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/90056
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
