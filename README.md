@@ -64,28 +64,123 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Movable Ink is a New York-headquartered marketing technology company that turns customer data into
-personalized content across email, mobile and web. Its two products are **Studio** (composite images
-and interactive content generated at open time) and **Da Vinci** (an AI decisioning layer that picks
-what each customer sees).
+Movable Ink is a New York-headquartered marketing technology company that turns customer data into personalized content across email, mobile and web. Its two products are Studio, which generates composite images and interactive content at the moment a message is opened, and Da Vinci, an AI decisioning layer that chooses what content each customer sees. The integration surface is a write-only Customer Data API that streams behavioral events into Studio, a family of native and wrapper mobile SDKs (iOS, Android, React Native, Cordova, Flutter, Expo), a Studio app toolchain built around the `movable` CLI and the cropduster library, and dozens of ESP/CDP connectors. API reference material is customer-gated; no OpenAPI is published.
 
-- Website: https://movableink.com/
-- Mobile SDK docs: https://sdk-mobile.movableink.com/
-- GitHub: https://github.com/movableink
-- Status: https://status.movableink.com/
-- Trust Center: https://trust.movableink.com/
+**Areas:** Company · Marketing · Personalization · Email · Customer Data · Mobile SDK · Artificial Intelligence · AdTech · Content · Event
 
-## API surface
+## Movable Ink on APIs.io
 
-| Surface | What it is | Contract |
-|---|---|---|
-| Customer Data API | Write-only behavioral-event collector, `POST https://collector.movableink-dmz.com/behavioral/{endpoint_key}`, HTTP Basic auth with credentials issued by the Movable Ink Solutions team | none published |
-| Platform Identity | Auth0/OIDC tenant at `auth.movableink.com` fronting `app.movableink.com` | OIDC discovery + RFC 8414 metadata + JWKS (all public) |
-| Mobile SDKs | iOS, Android, React Native, Cordova, Flutter, Expo | published to CocoaPods, Maven Central, npm and pub.dev |
-| Studio toolchain | `movable` CLI, `cropduster`, `@movable/studio-utilities` | published to npm |
+Everything profiled for Movable Ink is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/movable-ink/](https://apis.io/providers/movable-ink/)** — or go straight to one of the APIs or properties below.
 
-**No OpenAPI, AsyncAPI, GraphQL SDL, Postman collection, MCP server or A2A agent card was found** on
-any Movable Ink host. Movable Ink's own API reference lives on `support.movableink.com`, which
-requires an active tenant — the Zendesk help-center API returns `401` and anonymous browser requests
-get a Cloudflare interstitial (`403`). What is public is `https://movableink.com/llms.txt`, the OIDC
-discovery documents, the status page, and the Trust Center.
+### APIs (2)
+
+- [Movable Ink Customer Data API](https://apis.io/apis/movable-ink/customer-data-api/) — A write-only HTTP collector that ingests customer behavioral events in real time so Movable Ink Studio can use them for targeting and content generation.…
+- [Movable Ink Platform Identity (OpenID Connect)](https://apis.io/apis/movable-ink/identity/) — The OpenID Connect provider that fronts the Movable Ink Studio and Da Vinci web application at app.movableink.com. It publishes a full OIDC discovery…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Movable Ink Webhooks](https://apis.io/asyncapis/movable-ink/movable-ink-webhooks/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Movable Ink Authentication](https://apis.io/security/movable-ink/movable-ink-authentication/)
+- [Movable Ink Domain Security](https://apis.io/security/movable-ink/movable-ink-domain-security/)
+- [Movable Ink Trust Center](https://apis.io/security/movable-ink/movable-ink-trust-center/)
+- [Movable Ink Vulnerability Disclosure](https://apis.io/security/movable-ink/movable-ink-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Movable Ink Scopes](https://apis.io/scopes/movable-ink/movable-ink-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Movable Ink Plans Pricing](https://apis.io/plans/movable-ink/movable-ink-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Movable Ink Rate Limits](https://apis.io/rate-limits/movable-ink/movable-ink-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://movableink.com/)
+- [Documentation](https://sdk-mobile.movableink.com/)
+- [Getting started](https://sdk-mobile.movableink.com/)
+- [Sign up](https://app.movableink.com/)
+- [Support](https://support.movableink.com/)
+- [Blog](https://movableink.com/resources/blog)
+- [Compliance](https://movableink.com/privacy-security-and-compliance)
+- [Terms of service](https://movableink.com/terms-and-conditions)
+- [Privacy policy](https://movableink.com/privacy-policy)
+- [GitHub](https://github.com/movableink)
+- [Status](https://status.movableink.com)
+
+## API Evangelist rating
+
+**Kin Score 51.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 43.4 |
+
+**Agent readiness 25.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 41.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/movable-ink/](https://apis.io/providers/movable-ink/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Movable Ink: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/movable-ink/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
